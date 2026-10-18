@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Book Test DrivE</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+}
+
+.container{
+    width:700px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+h1{
+    text-align:center;
+}
+
+img{
+    width:100%;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#0b5ed7;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+}
+
+button:hover{
+    background:#084298;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Book Your Test Drive</h1>
+
+<img th:src="@{'/uploads/' + ${vehicle.imageUrl}}">
+
+<h2 th:text="${vehicle.make + ' ' + vehicle.model}"></h2>
+
+<h3>
+R
+<span th:text="${#numbers.formatDecimal(vehicle.price,1,'COMMA',2,'POINT')}"></span>
+</h3>
+
+<form th:action="@{/book/save}"
+      th:object="${booking}"
+      method="post">
+
+<input type="hidden" th:field="*{vehicle.id}">
+
+<label>First Name</label>
+
+<input type="text"
+       th:field="*{firstName}"
+       required>
+
+<label>Last Name</label>
+
+<input type="text"
+       th:field="*{lastName}"
+       required>
+
+<label>Email</label>
+
+<input type="email"
+       th:field="*{email}"
+       required>
+
+<label>Phone</label>
+
+<input type="text"
+       th:field="*{phone}"
+       required>
+
+<label>Preferred Date</label>
+
+<input type="date"
+       th:field="*{bookingDate}"
+       required>
+
+<label>Preferred Time</label>
+
+<input type="time"
+       th:field="*{bookingTime}"
+       required>
+
+<label>Message</label>
+
+<textarea
+        th:field="*{message}"
+        rows="5"></textarea>
+
+<button type="submit">
+
+Book Test Drive
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

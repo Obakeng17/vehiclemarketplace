@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Vehicles | Bucks Motors</title>
+
+<link rel="stylesheet" th:href="@{/css/vehicles.css}">
+<script th:src="@{/js/vehicles.js}" defer></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- Header -->
+<section class="vehicles-header">
+
+    <div class="header-content">
+        <h1>Find Your Perfect Vehicle</h1>
+
+        <p>
+            Browse our selection of quality vehicles.
+            Search by brand or model to find exactly what you're looking for.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Filters -->
+<section class="filters">
+
+    <div class="filter-container">
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by vehicle brand...">
+        </div>
+
+        <select id="brandFilter">
+            <option value="">All Brands</option>
+            <option value="Toyota">Toyota</option>
+            <option value="BMW">BMW</option>
+            <option value="Ford">Ford</option>
+            <option value="Mercedes">Mercedes</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Lexus">Lexus</option>
+        </select>
+
+        <select id="modelFilter">
+            <option value="">All Models</option>
+        </select>
+
+    </div>
+
+</section>
+
+<!-- Vehicle List -->
+<section class="vehicles-section">
+
+    <div class="vehicle-grid" id="vehicleGrid">
+
+        <div class="vehicle-card"
+             th:each="vehicle : ${vehicles}"
+             th:data-brand="${vehicle.make}"
+             th:data-model="${vehicle.model}">
+
+            <img th:src="@{'/uploads/' + ${vehicle.imageUrl}}"
+                 th:alt="${vehicle.make + ' ' + vehicle.model}">
+
+            <div class="vehicle-info">
+
+                <h2 th:text="${vehicle.make + ' ' + vehicle.model}"></h2>
+
+                <p>
+                    <strong>Year:</strong>
+                    <span th:text="${vehicle.year}"></span>
+                </p>
+
+                <p>
+                    <strong>Price:</strong>
+                    R
+                    <span th:text="${#numbers.formatDecimal(vehicle.price,1,'COMMA',2,'POINT')}"></span>
+                </p>
+
+                <p>
+                    <strong>Mileage:</strong>
+                    <span th:text="${vehicle.mileage}"></span> km
+                </p>
+
+                <p>
+                    <strong>Colour:</strong>
+                    <span th:text="${vehicle.colour}"></span>
+                </p>
+
+                <p>
+                    <strong>Condition:</strong>
+                    <span th:text="${vehicle.condition}"></span>
+                </p>
+
+                <p>
+                    <strong>Fuel Type:</strong>
+                    <span th:text="${vehicle.fuelType}"></span>
+                </p>
+
+                <p>
+                    <strong>Transmission:</strong>
+                    <span th:text="${vehicle.transmission}"></span>
+                </p>
+
+                <p class="vehicle-description"
+                   th:text="${vehicle.description}">
+                </p>
+
+                <a th:href="@{/book/{id}(id=${vehicle.id})}"
+                   class="book-btn">
+                    Book Test Drive
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-column">
+            <h3>BUCKS MOTORS</h3>
+
+            <p>
+                Your trusted destination for quality vehicles,
+                vehicle financing, trade-ins, and exceptional customer service.
+            </p>
+
+        </div>
+
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+
+            <ul>
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/vehicles}">Vehicles</a></li>
+                <li><a th:href="@{/financing}">Finance</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Services</h4>
+
+            <ul>
+                <li><a href="#">Vehicle Finance</a></li>
+                <li><a href="#">Trade-Ins</a></li>
+                <li><a href="#">Vehicle Sourcing</a></li>
+                <li><a href="#">Quality Inspections</a></li>
+                <li><a href="#">Dealer Support</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Contact Us</h4>
+
+            <p id="contact-info">📞 +27 12 345 6789</p>
+            <p>✉️ info@bucksmotors.co.za</p>
+            <p>📍 Pretoria, Gauteng, South Africa</p>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Bucks Motors. All Rights Reserved.</p>
+    </div>
+
+</footer>
+
+</body>
+</html>
